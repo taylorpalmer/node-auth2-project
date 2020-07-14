@@ -3,12 +3,19 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Users = require("./users-model");
 const restrict = require("../middleware/restrict");
+const session = require("express-session");
 
 const router = express.Router();
 
 router.get("/users", restrict("normal"), async (req, res, next) => {
   try {
     res.json(await Users.find());
+
+    if (!session) {
+      return res.status(401).json({
+        message: "You shall not pass!",
+      });
+    }
   } catch (err) {
     next(err);
   }
@@ -43,7 +50,7 @@ router.post("/login", async (req, res, next) => {
 
     if (!user) {
       return res.status(401).json({
-        message: "Invalid Credentials",
+        message: "You shall not pass!",
       });
     }
 
@@ -51,7 +58,7 @@ router.post("/login", async (req, res, next) => {
 
     if (!passwordValid) {
       return res.status(401).json({
-        message: "Invalid Credentials",
+        message: "You shall not pass!",
       });
     }
 

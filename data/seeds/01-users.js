@@ -15,5 +15,11 @@ exports.seed = async function (knex) {
       password: hashedPassword,
       department: "law enforcement",
     },
+    {
+      id: 2,
+      username: "lucymoran",
+      password: hashedPassword,
+      department: "administration",
+    },
   ]);
 };
