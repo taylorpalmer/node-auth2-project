@@ -1,13 +1,19 @@
+const hashedPassword =
+  "$2a$14$qHqCbXUImiBOgXlFNX47wuA7uFWNGNAZutYLvOeye9eotewGlfYV6";
 
-exports.seed = function(knex) {
-  // Deletes ALL existing entries
-  return knex('table_name').del()
-    .then(function () {
-      // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
-      ]);
-    });
+exports.seed = async function (knex) {
+  await knex("users").insert([
+    {
+      id: 1,
+      username: "dalecooper",
+      password: hashedPassword,
+      department: "law enforcement",
+    },
+    {
+      id: 2,
+      username: "deputyhawk",
+      password: hashedPassword,
+      department: "law enforcement",
+    },
+  ]);
 };
